@@ -21,39 +21,34 @@ public class s_speechRecog : MonoBehaviour
     KeywordRecognizer keywordRecognizer; //recognizes a particular word (from a dictionary)
     Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
 
-    public string[] Keyword;
+
     private string word;
     public Text wordspoken;
 
     public GameObject enemy;
     public GameObject player;
+    public GameObject gamemanager;
 
     public s_AIMovement AItriggers;
-    public s_Player commands;
+    public s_Player playerCommands;
+    public s_commands inputCommands;
     // Use this for initialization
     void Start()
     {
         enemy = GameObject.Find("Enemy");
         player = GameObject.Find("Player");
+        gamemanager = GameObject.Find("GameManager");
+
         AItriggers = enemy.GetComponent<s_AIMovement>();
-        commands = player.GetComponent<s_Player>();
+        playerCommands = player.GetComponent<s_Player>();
+        inputCommands = gamemanager.GetComponent<s_commands>();
         //Status Check
         print(PhraseRecognitionSystem.isSupported);
-        Debug.Log(PhraseRecognitionSystem.Status);//Status Check
         //
-        //List
-        Keyword = new string[7];
-        Keyword[0] = "Chase";
-        Keyword[1] = "Stop";
-        Keyword[2] = "Forward";
-        Keyword[3] = "Left";
-        Keyword[4] = "Right";
-        Keyword[5] = "Up";
-        Keyword[6] = "Back";
-         //
 
         //Initiate Recognizer
-        keywordRecognizer = new KeywordRecognizer(Keyword);
+        inputCommands.Start();
+        keywordRecognizer = new KeywordRecognizer(inputCommands.Keyword);
         keywordRecognizer.OnPhraseRecognized += PhraseRecognized; //each time something is called
 
         //Initiate Dictation
@@ -61,8 +56,21 @@ public class s_speechRecog : MonoBehaviour
         //dictationRecognizer.Start();
 
         //Start the recognizer
-       // keywordRecognizer.Start();
+        keywordRecognizer.Start();
 
+    }
+
+    public void RestartRecog()
+    {
+        keywordRecognizer.Stop();
+        keywordRecognizer.OnPhraseRecognized -= PhraseRecognized;
+        Debug.Log(inputCommands.Keyword);
+        //keywordRecognizer = new KeywordRecognizer(inputCommands.Keyword);
+
+        KeywordRecognizer temp = new KeywordRecognizer(inputCommands.Keyword);
+        keywordRecognizer = temp;
+        keywordRecognizer.OnPhraseRecognized += PhraseRecognized; //each time something is called
+        keywordRecognizer.Start();
     }
 
     void PhraseRecognized(PhraseRecognizedEventArgs args)
@@ -113,13 +121,13 @@ public class s_speechRecog : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
            // dictationRecognizer.Stop();
-            keywordRecognizer.Start();
+            //keywordRecognizer.Start();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
            // keywordRecognizer.Stop();
-            dictationRecognizer.Start();
+            //dictationRecognizer.Start();
 
             //https://forum.unity3d.com/threads/error-succeeded-hr.431300/#post-2789217
             //http://gyanendushekhar.com/2016/10/11/speech-recognition-in-unity3d-windows-speech-api/
@@ -131,13 +139,13 @@ public class s_speechRecog : MonoBehaviour
 
            // dictationRecognizer.Stop();
             //keywordRecognizer.Stop();
-            PhraseRecognitionSystem.Shutdown();
+            //PhraseRecognitionSystem.Shutdown();
         }
 
 
         if (Input.GetKey(KeyCode.R))
         {
-            PhraseRecognitionSystem.Restart();
+            //PhraseRecognitionSystem.Restart();
 
         }//Restarts phrase recognizer in case of failure
 
@@ -160,30 +168,30 @@ public class s_speechRecog : MonoBehaviour
 
     void LeftCalled()
     {
-        commands.Dir = Vector3.zero;
-        commands.Dir = Vector3.left;
+        playerCommands.Dir = Vector3.zero;
+        playerCommands.Dir = Vector3.left;
         print("Moving left");
     }
 
 
     void RightCalled()
     {
-        commands.Dir = Vector3.zero;
-        commands.Dir = Vector3.right;
+        playerCommands.Dir = Vector3.zero;
+        playerCommands.Dir = Vector3.right;
         print("Moving right");
     }
 
     void ForwardCalled()
     {
-        commands.Dir = Vector3.zero;
-        commands.Dir = Vector3.forward;
+        playerCommands.Dir = Vector3.zero;
+        playerCommands.Dir = Vector3.forward;
         print("Moving forward");
     }
 
     void BackCalled()
     {
-        commands.Dir = Vector3.zero;
-        commands.Dir = Vector3.back;
+        playerCommands.Dir = Vector3.zero;
+        playerCommands.Dir = Vector3.back;
         print("Moving back");
     }
 }

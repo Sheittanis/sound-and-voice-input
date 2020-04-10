@@ -11,6 +11,8 @@ public class s_micInput : MonoBehaviour
     //http://www.kaappine.fi/tutorials/using-microphone-input-in-unity3d/
     //
 
+    //https://docs.unity3d.com/ScriptReference/AudioSource-clip.html API//
+
     public GameObject audioInput;
     public float sensitivity = 100;
     public float loudness = 0;
