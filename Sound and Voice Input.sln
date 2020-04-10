@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sound and Voice Input.CSharp", "Sound and Voice Input.CSharp.csproj", "{35A19E96-6E9E-E3DD-1160-E1ACD4D2678D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35A19E96-6E9E-E3DD-1160-E1ACD4D2678D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A19E96-6E9E-E3DD-1160-E1ACD4D2678D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A19E96-6E9E-E3DD-1160-E1ACD4D2678D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A19E96-6E9E-E3DD-1160-E1ACD4D2678D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
