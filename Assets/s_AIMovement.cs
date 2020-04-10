@@ -6,12 +6,14 @@ public class s_AIMovement : MonoBehaviour
 {
     public Transform target;
     public int moveSpeed;
-    public int rotSpeed;
+    public float volThreshold;
 
 
-    public float reset_timer;
+    public float reset_timer; //timer function removed for now.
 
     public bool triggered;
+
+    public s_micInput micInput;
     void Start ()
     {
         moveSpeed = 1;
@@ -25,6 +27,12 @@ public class s_AIMovement : MonoBehaviour
         if (triggered)
         {
             Chase();     
+        }
+
+        if (micInput.loudness > 0.01)
+        {
+            triggered = true;
+            print("works");
         }
     }//End Update
 

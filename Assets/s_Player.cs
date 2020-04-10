@@ -5,30 +5,17 @@ using UnityEngine;
 public class s_Player : MonoBehaviour
 {
     public float speed = 2.0f;
-	// Use this for initialization
-	void Start ()
+
+    public Vector3 Dir = Vector3.zero;
+    // Use this for initialization
+    void Start ()
     {
         transform.position = new Vector3(0, 1, 0);
     }
-	
 
-    public void Left()
+    void Update()
     {
-        transform.position += Vector3.left * speed * Time.deltaTime;
+        transform.position += Dir * speed * Time.deltaTime;
     }
 
-    public void Right()
-    {
-        transform.position += Vector3.right * speed * Time.deltaTime;
-    }
-
-    public void Back()
-    {
-        transform.position += Vector3.back * speed * Time.deltaTime;
-    }
-
-    public void Forward()
-    {
-        transform.position += Vector3.forward * speed * Time.deltaTime;
-    }
 }
